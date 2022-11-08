@@ -3,9 +3,8 @@ import styled from '@emotion/styled';
 import { Container } from '@mui/system';
 import { Button } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import { Outlet } from 'react-router-dom';
 
-function App() {
+const Header = () => {
   const Title = styled('h1')({
     fontWeight: 700,
     color: '#090a0c',
@@ -17,7 +16,6 @@ function App() {
     boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
     backgroundColor: '#ffffff',
   });
-
   return (
     <>
       <Header>
@@ -44,9 +42,8 @@ function App() {
           </Button>
         </Container>
       </Header>
-      <Outlet />
     </>
   );
-}
+};
 
-export default App;
+export default Header;

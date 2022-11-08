@@ -37,9 +37,13 @@ const Card = ({ country }: any) => {
           boxShadow: '0 0 10px 0 rgba(0,0,0,0.1)',
         }}
       >
-        <Box sx={{ width: '100%', height: '161px', objectFit: 'cover' }}>
+        <Box sx={{ width: '100%', height: '161px' }}>
           {/* Country Logo */}
-          <img src={country?.flags.png} alt='' />
+          <img
+            src={country?.flags.png}
+            alt=''
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          />
         </Box>
         <Box
           sx={{

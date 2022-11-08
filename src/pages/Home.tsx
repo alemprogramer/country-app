@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import Card from '../components/Card';
+import Header from '../components/Header';
 
 function Home() {
   const searchClick = useRef<HTMLInputElement>(null);
@@ -70,6 +71,7 @@ function Home() {
 
   return (
     <>
+      <Header />
       <Container maxWidth='xl'>
         <Grid container spacing={5}>
           <Grid
