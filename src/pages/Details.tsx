@@ -8,11 +8,12 @@ import axios from 'axios';
 
 const Details = () => {
   let { countryName } = useParams();
-  const [country,setCountry]:any = useState('')
+  const [country, setCountry] = useState<any>('');
+  const [currency, setCurrency] = useState<any>('');
   const navigate = useNavigate();
   console.log(
-    '🚀 ~ file: details.tsx ~ line 6 ~ Details ~ country',
-    countryName
+    '🚀 ~ file: details.tsx ~ line 13 ~ Details ~ currency',
+    currency
   );
 
   const Heading = styled('h4')({
@@ -34,28 +35,25 @@ const Details = () => {
     fontWeight: '400',
   });
 
-  useEffect(()=>{
-    let currencies = country?.currencies
-    if(currencies){
-    let data =  Object.keys(currencies);
-    console.log(data);
-    }
+  useEffect(() => {
     (async () => {
       try {
         const res = await axios.get(
           `https://restcountries.com/v3.1/name/${countryName}`
         );
         setCountry(res.data[0]);
+        const currencyList = res.data[0].currencies;
+        const currencyObj: any = Object.values(currencyList)[0];
+        const currency = currencyObj.name;
+        setCurrency(currency);
       } catch (error) {
         console.log(error);
       }
-    })()
-  },[])
+    })();
+  }, []);
 
   // console.log(country);
-  // 
-  
-  
+  //
 
   return (
     <>
@@ -198,8 +196,8 @@ const Details = () => {
                       }}
                     >
                       <Title>currencies: </Title>
-                      
-                      <Info>{}</Info>
+
+                      <Info>{currency}</Info>
                     </Box>
                     <Box
                       sx={{
