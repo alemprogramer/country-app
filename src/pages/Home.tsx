@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { Container } from '@mui/system';
+import axios from 'axios';
 import {
   Box,
   Grid,
@@ -19,6 +20,39 @@ function Home() {
     width: '90%',
     padding: '10px 8px',
   });
+
+  const [allCountry,setAllCountry] =useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [region,setRegion] = useState('');
+  const [searchWord,setSearchWord] = useState('')
+  useEffect(()=>{
+      (async ()=>{
+        try {
+          const country = await axios.get('https://restcountries.com/v3.1/all')
+          // console.log(country.data);
+          setAllCountry(country.data);
+          setFilteredData(country.data);
+        } catch (error) {
+          console.log( error);
+        }
+      })()
+  },[])
+
+  const handleFilter = (event:any) => {
+    const searchWord = event;
+    setSearchWord(event)
+    //assets
+    const newFilter = allCountry.filter((value:any) => {
+      if (!value?.name?.common) return 'all';
+      return value?.name?.common.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === '') {
+      setFilteredData(allCountry);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
 
   return (
     <>
@@ -49,6 +83,8 @@ function Home() {
               <TextField
                 placeholder='Search for a country...'
                 ref={searchClick}
+                onChange={(e)=>handleFilter(e.target.value)}
+                value={searchWord}
               />
             </Box>
             <FormControl
@@ -75,9 +111,12 @@ function Home() {
         </Grid>
         <Grid container spacing={9}>
           {/* Map this component */}
+          {filteredData.map((country,i)=>(
+          <>
           <Grid item md={4}>
-            <Card data={''} />
+            <Card  key ={i} country={country}/>
           </Grid>
+          </>))}
         </Grid>
       </Container>
     </>
