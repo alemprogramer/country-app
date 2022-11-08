@@ -62,10 +62,16 @@ const Details = () => {
           <Grid item md={12}>
             <Grid container spacing={15}>
               <Grid item md={6}>
-                <Box
-                  sx={{ width: '100%', height: '400px', objectFit: 'contain' }}
-                >
-                  <img src='' alt='' />
+                <Box sx={{ width: '100%', height: '400px' }}>
+                  <img
+                    src=''
+                    alt=''
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                    }}
+                  />
                 </Box>
               </Grid>
               <Grid
