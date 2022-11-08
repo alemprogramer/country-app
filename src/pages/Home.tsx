@@ -54,6 +54,16 @@ function Home() {
     }
   };
 
+  const filterByRegion =async (event:any) => {
+    setRegion(event.target.value)
+    try {
+      const country = await axios.get(`https://restcountries.com/v3.1/region/${event.target.value}`)
+      setFilteredData(country.data);
+    } catch (error) {
+      console.log( error);
+    }
+  }
+
   return (
     <>
       <Container maxWidth='xl'>
@@ -100,11 +110,16 @@ function Home() {
               <Select
                 labelId='demo-simple-select-label'
                 id='demo-simple-select'
-                // value={age}
+                value={region}
                 label='Age'
                 // onChange={handleChange}
+                onChange={filterByRegion}
               >
-                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={'Africa'}>Africa</MenuItem>
+                <MenuItem value="America">America</MenuItem>
+                <MenuItem value="Asia">Asia</MenuItem>
+                <MenuItem value="Europe">Europe</MenuItem>
+                <MenuItem value="Oceania">Oceania</MenuItem>
               </Select>
             </FormControl>
           </Grid>
