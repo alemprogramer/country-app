@@ -9,7 +9,7 @@ import axios from 'axios';
 const Details = () => {
   let { countryName } = useParams();
   const [country, setCountry] = useState<any>('');
-  const [currency, setCurrency] = useState<any>('');
+  const [currency, setCurrency] = useState<string>('');
   const navigate = useNavigate();
   console.log(
     '🚀 ~ file: details.tsx ~ line 13 ~ Details ~ currency',
