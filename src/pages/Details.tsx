@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Grid, Button, Container, Box } from '@mui/material';
 import WestIcon from '@mui/icons-material/West';
 import Header from '../components/Header';
+import styled from '@emotion/styled';
 
 const Details = () => {
   let { countryName } = useParams();
@@ -11,6 +12,25 @@ const Details = () => {
     '🚀 ~ file: details.tsx ~ line 6 ~ Details ~ country',
     countryName
   );
+
+  const Heading = styled('h4')({
+    fontSize: '36px',
+    lineHeight: 1,
+    fontWeight: '700',
+    marginBottom: '40px',
+  });
+
+  const Title = styled('p')({
+    fontSize: '24px',
+    lineHeight: 1,
+    fontWeight: '600',
+    textTransform: 'capitalize',
+  });
+  const Info = styled('p')({
+    fontSize: '22px',
+    lineHeight: 1,
+    fontWeight: '400',
+  });
 
   return (
     <>
@@ -52,7 +72,116 @@ const Details = () => {
                 item
                 md={6}
                 sx={{ display: 'flex', flexDirection: 'column' }}
-              ></Grid>
+              >
+                <Heading>Bulgeria</Heading>
+                <Box
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    flexDirection: 'row',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: '60%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>native name</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>population</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>region</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>sub region</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>capital</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      width: '40%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>top level domain</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>currencies</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        width: '100%',
+                      }}
+                    >
+                      <Title>languages</Title>
+                      <Info>{/* Value */}</Info>
+                    </Box>
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
