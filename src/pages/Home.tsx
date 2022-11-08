@@ -21,30 +21,32 @@ function Home() {
     padding: '10px 8px',
   });
 
-  const [allCountry,setAllCountry] =useState([]);
+  const [allCountry, setAllCountry] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [region,setRegion] = useState('');
-  const [searchWord,setSearchWord] = useState('')
-  useEffect(()=>{
-      (async ()=>{
-        try {
-          const country = await axios.get('https://restcountries.com/v3.1/all')
-          // console.log(country.data);
-          setAllCountry(country.data);
-          setFilteredData(country.data);
-        } catch (error) {
-          console.log( error);
-        }
-      })()
-  },[])
+  const [region, setRegion] = useState('');
+  const [searchWord, setSearchWord] = useState('');
+  useEffect(() => {
+    (async () => {
+      try {
+        const country = await axios.get('https://restcountries.com/v3.1/all');
+        // console.log(country.data);
+        setAllCountry(country.data);
+        setFilteredData(country.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
-  const handleFilter = (event:any) => {
+  const handleFilter = (event: any) => {
     const searchWord = event;
-    setSearchWord(event)
+    setSearchWord(event);
     //assets
-    const newFilter = allCountry.filter((value:any) => {
+    const newFilter = allCountry.filter((value: any) => {
       if (!value?.name?.common) return 'all';
-      return value?.name?.common.toLowerCase().includes(searchWord.toLowerCase());
+      return value?.name?.common
+        .toLowerCase()
+        .includes(searchWord.toLowerCase());
     });
 
     if (searchWord === '') {
@@ -54,15 +56,17 @@ function Home() {
     }
   };
 
-  const filterByRegion =async (event:any) => {
-    setRegion(event.target.value)
+  const filterByRegion = async (event: any) => {
+    setRegion(event.target.value);
     try {
-      const country = await axios.get(`https://restcountries.com/v3.1/region/${event.target.value}`)
+      const country = await axios.get(
+        `https://restcountries.com/v3.1/region/${event.target.value}`
+      );
       setFilteredData(country.data);
     } catch (error) {
-      console.log( error);
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -93,7 +97,7 @@ function Home() {
               <TextField
                 placeholder='Search for a country...'
                 ref={searchClick}
-                onChange={(e)=>handleFilter(e.target.value)}
+                onChange={(e) => handleFilter(e.target.value)}
                 value={searchWord}
               />
             </Box>
@@ -115,23 +119,22 @@ function Home() {
                 // onChange={handleChange}
                 onChange={filterByRegion}
               >
-                <MenuItem value={'Africa'}>Africa</MenuItem>
-                <MenuItem value="America">America</MenuItem>
-                <MenuItem value="Asia">Asia</MenuItem>
-                <MenuItem value="Europe">Europe</MenuItem>
-                <MenuItem value="Oceania">Oceania</MenuItem>
+                <MenuItem value='Africa'>Africa</MenuItem>
+                <MenuItem value='America'>America</MenuItem>
+                <MenuItem value='Asia'>Asia</MenuItem>
+                <MenuItem value='Europe'>Europe</MenuItem>
+                <MenuItem value='Oceania'>Oceania</MenuItem>
               </Select>
             </FormControl>
           </Grid>
         </Grid>
         <Grid container spacing={9}>
           {/* Map this component */}
-          {filteredData.map((country,i)=>(
-          <>
-          <Grid item md={4}>
-            <Card  key ={i} country={country}/>
-          </Grid>
-          </>))}
+          {filteredData.map((country: any) => (
+            <Grid key={country?.name?.common} item md={4} lg={3} sm={12}>
+              <Card country={country} />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </>

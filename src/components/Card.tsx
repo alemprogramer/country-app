@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
 
-const Card = ({ country }:any) => {
+const Card = ({ country }: any) => {
   const Name = styled('h3')({
     fontWeight: 700,
     color: '#090a0c',
@@ -26,7 +26,7 @@ const Card = ({ country }:any) => {
     textTransform: 'capitalize',
   });
   return (
-    <Link to='/'>
+    <Link to={`country/${country?.name?.common}`}>
       <Box
         sx={{
           display: 'flex',
@@ -39,7 +39,7 @@ const Card = ({ country }:any) => {
       >
         <Box sx={{ width: '100%', height: '161px', objectFit: 'cover' }}>
           {/* Country Logo */}
-          <img src={country?.flags.png}  alt="" />
+          <img src={country?.flags.png} alt='' />
         </Box>
         <Box
           sx={{
