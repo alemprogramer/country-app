@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid, Button, Container, Box } from '@mui/material';
 import WestIcon from '@mui/icons-material/West';
 import Header from '../components/Header';
 import styled from '@emotion/styled';
+import axios from 'axios';
 
 const Details = () => {
   let { countryName } = useParams();
+  const [country,setCountry]:any = useState('')
   const navigate = useNavigate();
   console.log(
     '🚀 ~ file: details.tsx ~ line 6 ~ Details ~ country',
@@ -31,6 +33,29 @@ const Details = () => {
     lineHeight: 1,
     fontWeight: '400',
   });
+
+  useEffect(()=>{
+    let currencies = country?.currencies
+    if(currencies){
+    let data =  Object.keys(currencies);
+    console.log(data);
+    }
+    (async () => {
+      try {
+        const res = await axios.get(
+          `https://restcountries.com/v3.1/name/${countryName}`
+        );
+        setCountry(res.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    })()
+  },[])
+
+  // console.log(country);
+  // 
+  
+  
 
   return (
     <>
@@ -79,7 +104,7 @@ const Details = () => {
                 md={6}
                 sx={{ display: 'flex', flexDirection: 'column' }}
               >
-                <Heading>Bulgeria</Heading>
+                <Heading>{country?.name?.common}</Heading>
                 <Box
                   sx={{
                     width: '100%',
@@ -103,8 +128,8 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>native name</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>native name : </Title>
+                      <Info>{country?.name?.common}</Info>
                     </Box>
                     <Box
                       sx={{
@@ -113,8 +138,8 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>population</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>population : </Title>
+                      <Info>{country?.population}</Info>
                     </Box>
                     <Box
                       sx={{
@@ -123,8 +148,8 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>region</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>region: </Title>
+                      <Info>{country?.region}</Info>
                     </Box>
                     <Box
                       sx={{
@@ -133,8 +158,8 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>sub region</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>sub region : </Title>
+                      <Info>{country?.subregion}</Info>
                     </Box>
                     <Box
                       sx={{
@@ -143,8 +168,8 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>capital</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>capital : </Title>
+                      <Info>{country?.capital}</Info>
                     </Box>
                   </Box>
                   <Box
@@ -162,8 +187,8 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>top level domain</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>top level domain : </Title>
+                      <Info>{country?.tld}</Info>
                     </Box>
                     <Box
                       sx={{
@@ -172,8 +197,9 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>currencies</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>currencies: </Title>
+                      
+                      <Info>{}</Info>
                     </Box>
                     <Box
                       sx={{
