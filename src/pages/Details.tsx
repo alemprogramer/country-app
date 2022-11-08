@@ -181,6 +181,33 @@ const Details = () => {
                     </Box>
                   </Box>
                 </Box>
+                <Box
+                  sx={{
+                    mt: 9,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: 2,
+                  }}
+                >
+                  <Title>border countries</Title>
+                  <Button
+                    variant='text'
+                    sx={{
+                      justifyContent: 'start',
+                      alignItems: 'center',
+                      textTransform: 'capitalize',
+                      color: '#131416',
+                      boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
+                      padding: '8px 30px',
+                    }}
+                    onClick={() => navigate(`/country/use`)}
+                  >
+                    USA
+                  </Button>
+                </Box>
               </Grid>
             </Grid>
           </Grid>
