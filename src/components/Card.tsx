@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
 
-const Card = ({ data = {} }) => {
+const Card = ({ country }:any) => {
   const Name = styled('h3')({
     fontWeight: 700,
     color: '#090a0c',
@@ -39,6 +39,7 @@ const Card = ({ data = {} }) => {
       >
         <Box sx={{ width: '100%', height: '161px', objectFit: 'cover' }}>
           {/* Country Logo */}
+          <img src={country?.flags.png}  alt="" />
         </Box>
         <Box
           sx={{
@@ -50,7 +51,7 @@ const Card = ({ data = {} }) => {
             alignItems: 'flex-start',
           }}
         >
-          <Name>Germany</Name>
+          <Name>{country?.name?.common}</Name>
           <Box
             sx={{
               marginTop: 4,
@@ -66,8 +67,8 @@ const Card = ({ data = {} }) => {
                 justifyContent: 'flex-start',
               }}
             >
-              <Title>population</Title>
-              <Data></Data>
+              <Title>population : </Title>
+              <Data>{country?.population}</Data>
             </Box>
             <Box
               sx={{
@@ -76,8 +77,8 @@ const Card = ({ data = {} }) => {
                 justifyContent: 'flex-start',
               }}
             >
-              <Title>region</Title>
-              <Data></Data>
+              <Title>region : </Title>
+              <Data>{country?.region}</Data>
             </Box>
             <Box
               sx={{
@@ -86,8 +87,8 @@ const Card = ({ data = {} }) => {
                 justifyContent: 'flex-start',
               }}
             >
-              <Title>capital</Title>
-              <Data></Data>
+              <Title>capital : </Title>
+              <Data>{country?.capital}</Data>
             </Box>
           </Box>
         </Box>
