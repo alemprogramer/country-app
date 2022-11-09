@@ -92,9 +92,9 @@ function Home() {
                 borderRadius: 2,
                 cursor: 'text',
               }}
-              onClick={() => {
-                searchClick.current?.focus();
-              }}
+              // onClick={() => {
+              //   searchClick.current?.focus();
+              // }}
             >
               <SearchIcon sx={{}} />
               <TextField
@@ -103,6 +103,7 @@ function Home() {
                 onChange={(e) => handleFilter(e.target.value)}
                 value={searchWord}
               />
+              {/* <input type='text' onChange={(e) => handleFilter(e.target.value)} /> */}
             </Box>
             <FormControl
               sx={{
@@ -139,7 +140,7 @@ function Home() {
               <Card country={country} />
             </Grid>
           )):
-            <p className='text'>Result not fount</p>):
+            <p className='text'> Search Result not found!</p>):
             <p className='text'> Loading..</p>
           }
          
