@@ -247,7 +247,7 @@ const Details = () => {
                   >
                     {c}
                   </Button>
-                  )): <Info style={{color:'red'}}>:This country don't have any border country</Info>
+                  )): <Info style={{color:'red'}}>: This country doesn't have any bordering country.</Info>
                   }
                 </Box>
               </Grid>

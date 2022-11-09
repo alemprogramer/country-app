@@ -69,6 +69,7 @@ function Home() {
     }
   };
 
+
   return (
     <>
       <Header />
@@ -132,11 +133,16 @@ function Home() {
         </Grid>
         <Grid container spacing={9}>
           {/* Map this component */}
-          {filteredData.map((country: any) => (
+         { allCountry.length >0?
+          (filteredData.length>0? filteredData.map((country: any) => (
             <Grid key={country?.name?.common} item md={4} lg={3} sm={12}>
               <Card country={country} />
             </Grid>
-          ))}
+          )):
+            <p className='text'>Result not fount</p>):
+            <p className='text'> Loading..</p>
+          }
+         
         </Grid>
       </Container>
     </>
