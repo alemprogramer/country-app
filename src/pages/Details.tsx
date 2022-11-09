@@ -10,6 +10,7 @@ const Details = () => {
   let { countryName } = useParams();
   const [country, setCountry] = useState<any>('');
   const [currency, setCurrency] = useState<string>('');
+  const [language,setLanguage] = useState<any>('');
   const navigate = useNavigate();
   console.log(
     '🚀 ~ file: details.tsx ~ line 13 ~ Details ~ currency',
@@ -45,12 +46,17 @@ const Details = () => {
         const currencyList = res.data[0].currencies;
         const currencyObj: any = Object.values(currencyList)[0];
         const currency = currencyObj.name;
+
+        const languageList = res.data[0].languages;
+        const languageObject: any = Object.values(languageList) 
+        console.log('language: ',languageObject);
+        setLanguage(languageObject)
         setCurrency(currency);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [countryName]);
 
   // console.log(country);
   //
@@ -87,7 +93,7 @@ const Details = () => {
               <Grid item md={6}>
                 <Box sx={{ width: '100%', height: '400px' }}>
                   <img
-                    src=''
+                    src={country?.flags?.png}
                     alt=''
                     style={{
                       width: '100%',
@@ -206,8 +212,10 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>languages</Title>
-                      <Info>{/* Value */}</Info>
+                      <Title>languages: </Title>
+                      {language && language.map((m:String,i:Number)=>(
+                      <Info >{`${m}, `}</Info>
+                      ))}
                     </Box>
                   </Box>
                 </Box>
@@ -223,6 +231,7 @@ const Details = () => {
                   }}
                 >
                   <Title>border countries</Title>
+                  {country?.borders && country?.borders.map((c:string,i:Number) =>(
                   <Button
                     variant='text'
                     sx={{
@@ -233,10 +242,11 @@ const Details = () => {
                       boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
                       padding: '8px 30px',
                     }}
-                    onClick={() => navigate(`/country/use`)}
+                    onClick={() => navigate(`/country/${c}`)}
                   >
-                    USA
+                    {c}
                   </Button>
+                  ))}
                 </Box>
               </Grid>
             </Grid>
