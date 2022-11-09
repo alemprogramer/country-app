@@ -231,7 +231,8 @@ const Details = () => {
                   }}
                 >
                   <Title>border countries</Title>
-                  {country?.borders && country?.borders.map((c:string,i:Number) =>(
+                  {country?.borders ?
+                   country?.borders.map((c:string,i:Number) =>(
                   <Button
                     variant='text'
                     sx={{
@@ -246,7 +247,8 @@ const Details = () => {
                   >
                     {c}
                   </Button>
-                  ))}
+                  )): <Info style={{color:'red'}}>:This country don't have any border country</Info>
+                  }
                 </Box>
               </Grid>
             </Grid>
