@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { Container } from '@mui/system';
 import { Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import ColorModeContext from '../context/colormode';
 
 const Header = () => {
+  const theme = useTheme();
+
+  const colorMode = useContext(ColorModeContext);
   const Title = styled('h1')({
     fontWeight: 700,
     color: '#090a0c',
@@ -14,7 +19,7 @@ const Header = () => {
   });
   const Header = styled('header')({
     boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme.palette.mode === 'light' ? '#ffffff' : '#000000',
   });
   return (
     <>
@@ -34,11 +39,12 @@ const Header = () => {
               justifyContent: 'start',
               alignItems: 'center',
               textTransform: 'capitalize',
-              color: '#131416',
+              color: theme.palette.mode === 'light' ? '#131416' : '#f1f1f1',
             }}
             startIcon={<DarkModeOutlinedIcon />}
+            onClick={() => colorMode.toggleColorMode()}
           >
-            dark mode
+            {theme.palette.mode === 'light' ? 'dark' : 'light'} mode
           </Button>
         </Container>
       </Header>
