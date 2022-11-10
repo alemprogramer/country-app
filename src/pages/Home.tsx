@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from '@emotion/styled';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import {
@@ -14,13 +13,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import Card from '../components/Card';
 import Header from '../components/Header';
 
+const allRegions = ['all', 'Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+
 function Home() {
   const searchClick = useRef<HTMLInputElement>(null);
-  const TextField = styled('input')({
-    border: 0,
-    width: '90%',
-    padding: '10px 8px',
-  });
 
   const [allCountry, setAllCountry] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -58,17 +54,22 @@ function Home() {
   };
 
   const filterByRegion = async (event: any) => {
-    setRegion(event.target.value);
+    const v = event.target.value;
+    setRegion(v);
+    let apiPoint;
+    if (v === 'all') {
+      apiPoint = 'https://restcountries.com/v3.1/all';
+    } else {
+      apiPoint = `https://restcountries.com/v3.1/region/${v}`;
+    }
+
     try {
-      const country = await axios.get(
-        `https://restcountries.com/v3.1/region/${event.target.value}`
-      );
+      const country = await axios.get(apiPoint);
       setFilteredData(country.data);
     } catch (error) {
       console.log(error);
     }
   };
-
 
   return (
     <>
@@ -77,15 +78,21 @@ function Home() {
         <Grid container spacing={5}>
           <Grid
             item
-            md={12}
-            sx={{ justifyContent: 'space-between', my: 6, display: 'flex' }}
+            sx={{
+              justifyContent: 'space-between',
+              my: 6,
+              display: 'flex',
+              width: '100%',
+              flexWrap: 'wrap',
+              gap: { xs: '40px', sm: 0 },
+            }}
           >
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                width: '33%',
+                width: { xs: '100%', sm: '50%', md: '33%' },
                 bgcolor: '#ffffff',
                 boxShadow: '0 0 10px 0 rgba(0,0,0,0.2)',
                 p: '10px 12px',
@@ -97,53 +104,65 @@ function Home() {
               // }}
             >
               <SearchIcon sx={{}} />
-              <TextField
+              <input
+                type={'text'}
+                style={{
+                  border: 0,
+                  width: '90%',
+                  padding: '10px 8px',
+                }}
                 placeholder='Search for a country...'
                 ref={searchClick}
                 onChange={(e) => handleFilter(e.target.value)}
                 value={searchWord}
               />
-              {/* <input type='text' onChange={(e) => handleFilter(e.target.value)} /> */}
             </Box>
             <FormControl
               sx={{
-                width: '15%',
+                width: { xs: '70%', sm: '40%', md: '25%' },
                 bgcolor: '#ffffff',
+                display: 'flex',
                 boxShadow: '0 0 5px 0 rgba(0,0,0,0.15)',
               }}
             >
-              <InputLabel id='demo-simple-select-label'>
-                Filter by Region
-              </InputLabel>
+              <InputLabel id='filter-by-region'>Filter by Region</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
+                labelId='filter-by-region'
+                id='region-select'
                 value={region}
                 label='Age'
                 // onChange={handleChange}
                 onChange={filterByRegion}
               >
-                <MenuItem value='Africa'>Africa</MenuItem>
-                <MenuItem value='America'>America</MenuItem>
-                <MenuItem value='Asia'>Asia</MenuItem>
-                <MenuItem value='Europe'>Europe</MenuItem>
-                <MenuItem value='Oceania'>Oceania</MenuItem>
+                {allRegions.map((v: string) => (
+                  <MenuItem
+                    key={v}
+                    value={v}
+                    sx={{ textTransform: 'capitalize' }}
+                    disabled={v === region}
+                  >
+                    {v}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container spacing={9}>
+        <Grid container spacing={9} justifyContent='center'>
           {/* Map this component */}
-         { allCountry.length >0?
-          (filteredData.length>0? filteredData.map((country: any) => (
-            <Grid key={country?.name?.common} item md={4} lg={3} sm={12}>
-              <Card country={country} />
-            </Grid>
-          )):
-            <p className='text'> Search Result not found!</p>):
+          {allCountry.length > 0 ? (
+            filteredData.length > 0 ? (
+              filteredData.map((country: any) => (
+                <Grid key={country?.name?.common} item md={4} lg={3} sm={6}>
+                  <Card country={country} />
+                </Grid>
+              ))
+            ) : (
+              <p className='text'> Search Result not found!</p>
+            )
+          ) : (
             <p className='text'> Loading..</p>
-          }
-         
+          )}
         </Grid>
       </Container>
     </>

@@ -10,7 +10,7 @@ const Details = () => {
   let { countryName } = useParams();
   const [country, setCountry] = useState<any>('');
   const [currency, setCurrency] = useState<string>('');
-  const [language,setLanguage] = useState<any>('');
+  const [language, setLanguage] = useState<any>('');
   const navigate = useNavigate();
   console.log(
     '🚀 ~ file: details.tsx ~ line 13 ~ Details ~ currency',
@@ -48,9 +48,9 @@ const Details = () => {
         const currency = currencyObj.name;
 
         const languageList = res.data[0].languages;
-        const languageObject: any = Object.values(languageList) 
-        console.log('language: ',languageObject);
-        setLanguage(languageObject)
+        const languageObject: any = Object.values(languageList);
+        console.log('language: ', languageObject);
+        setLanguage(languageObject);
         setCurrency(currency);
       } catch (error) {
         console.log(error);
@@ -67,9 +67,11 @@ const Details = () => {
       <Container maxWidth='xl'>
         <Grid
           container
-          spacing={9}
+          spacing={{ md: 9, xs: 4 }}
           flexDirection='column'
-          sx={{ marginTop: 10 }}
+          sx={{
+            marginTop: { md: 10, xs: 4 },
+          }}
         >
           <Grid item md={12}>
             <Button
@@ -80,7 +82,7 @@ const Details = () => {
                 textTransform: 'capitalize',
                 color: '#131416',
                 boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
-                padding: '14px 40px',
+                padding: { md: '14px 40px' },
               }}
               startIcon={<WestIcon />}
               onClick={() => navigate(-1)}
@@ -88,10 +90,10 @@ const Details = () => {
               back
             </Button>
           </Grid>
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Grid container spacing={15}>
-              <Grid item md={6}>
-                <Box sx={{ width: '100%', height: '400px' }}>
+              <Grid item md={6} sm={12} justifyContent='center'>
+                <Box sx={{ width: '100%', height: '400px', display: 'flex' }}>
                   <img
                     src={country?.flags?.png}
                     alt=''
@@ -106,7 +108,12 @@ const Details = () => {
               <Grid
                 item
                 md={6}
-                sx={{ display: 'flex', flexDirection: 'column' }}
+                sm={12}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flexWrap: 'wrap',
+                }}
               >
                 <Heading>{country?.name?.common}</Heading>
                 <Box
@@ -115,11 +122,13 @@ const Details = () => {
                     display: 'flex',
                     justifyContent: 'flex-start',
                     flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    gap: { xs: '35px', md: 0 },
                   }}
                 >
                   <Box
                     sx={{
-                      width: '60%',
+                      width: { md: '60%', xs: '100%' },
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 2,
@@ -178,7 +187,7 @@ const Details = () => {
                   </Box>
                   <Box
                     sx={{
-                      width: '40%',
+                      width: { md: '40%', xs: '100%' },
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 2,
@@ -213,9 +222,10 @@ const Details = () => {
                       }}
                     >
                       <Title>languages: </Title>
-                      {language && language.map((m:String,i:Number)=>(
-                      <Info >{`${m}, `}</Info>
-                      ))}
+                      {language &&
+                        language.map((m: String, i: Number) => (
+                          <Info>{`${m}, `}</Info>
+                        ))}
                     </Box>
                   </Box>
                 </Box>
@@ -230,25 +240,31 @@ const Details = () => {
                     gap: 2,
                   }}
                 >
-                  <Title>border countries</Title>
-                  {country?.borders ?
-                   country?.borders.map((c:string,i:Number) =>(
-                  <Button
-                    variant='text'
-                    sx={{
-                      justifyContent: 'start',
-                      alignItems: 'center',
-                      textTransform: 'capitalize',
-                      color: '#131416',
-                      boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
-                      padding: '8px 30px',
-                    }}
-                    onClick={() => navigate(`/country/${c}`)}
-                  >
-                    {c}
-                  </Button>
-                  )): <Info style={{color:'red'}}>: This country doesn't have any bordering country.</Info>
-                  }
+                  <Box sx={{ width: { xs: '100%', md: 'auto' } }}>
+                    <Title>border countries</Title>
+                  </Box>
+                  {country?.borders ? (
+                    country?.borders.map((c: string, i: Number) => (
+                      <Button
+                        variant='text'
+                        sx={{
+                          justifyContent: 'start',
+                          alignItems: 'center',
+                          textTransform: 'capitalize',
+                          color: '#131416',
+                          boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
+                          padding: '8px 30px',
+                        }}
+                        onClick={() => navigate(`/country/${c}`)}
+                      >
+                        {c}
+                      </Button>
+                    ))
+                  ) : (
+                    <Info style={{ color: 'red' }}>
+                      : This country doesn't have any bordering country.
+                    </Info>
+                  )}
                 </Box>
               </Grid>
             </Grid>
