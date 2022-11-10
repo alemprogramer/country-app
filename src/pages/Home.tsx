@@ -111,6 +111,8 @@ function Home() {
                   border: 0,
                   width: '90%',
                   padding: '10px 8px',
+                  background:
+                    theme.palette.mode === 'light' ? '#ffffff' : '#2A3742',
                 }}
                 placeholder='Search for a country...'
                 ref={searchClick}

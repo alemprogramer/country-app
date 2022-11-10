@@ -77,7 +77,7 @@ const Details = () => {
         >
           <Grid item md={12}>
             <Button
-              variant='text'
+              variant={theme.palette.mode === 'light' ? 'text' : 'outlined'}
               sx={{
                 justifyContent: 'start',
                 alignItems: 'center',
@@ -248,12 +248,17 @@ const Details = () => {
                   {country?.borders ? (
                     country?.borders.map((c: string, i: Number) => (
                       <Button
-                        variant='text'
+                        variant={
+                          theme.palette.mode === 'light' ? 'text' : 'outlined'
+                        }
                         sx={{
                           justifyContent: 'start',
                           alignItems: 'center',
                           textTransform: 'capitalize',
-                          color: theme.palette.mode === 'light' ? '#2A3742' : '#f1f1f1',
+                          color:
+                            theme.palette.mode === 'light'
+                              ? '#2A3742'
+                              : '#f1f1f1',
                           boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
                           padding: '8px 30px',
                         }}
