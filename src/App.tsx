@@ -16,18 +16,29 @@ const App = () => {
     []
   );
 
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode]
-  );
+  const lightTheme = createTheme({
+    palette: {
+      background: {
+        default: '#fafafa',
+      },
+      text: {
+        primary: '#131416',
+      },
+    },
+  });
+  const darkTheme = createTheme({
+    palette: {
+      background: {
+        default: '#212e37',
+      },
+      text: {
+        primary: '#f8ffff',
+      },
+    },
+  });
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
         <CssBaseline />
         <RouterProvider router={router} />
       </ThemeProvider>
