@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Container } from '@mui/system';
 import axios from 'axios';
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Grid,
@@ -17,7 +18,7 @@ const allRegions = ['all', 'Africa', 'America', 'Asia', 'Europe', 'Oceania'];
 
 function Home() {
   const searchClick = useRef<HTMLInputElement>(null);
-
+  const theme = useTheme();
   const [allCountry, setAllCountry] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [region, setRegion] = useState('');
@@ -93,7 +94,7 @@ function Home() {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 width: { xs: '100%', sm: '50%', md: '33%' },
-                bgcolor: '#ffffff',
+                bgcolor: theme.palette.mode === 'light' ? '#ffffff' : '#2A3742',
                 boxShadow: '0 0 10px 0 rgba(0,0,0,0.2)',
                 p: '10px 12px',
                 borderRadius: 2,
@@ -120,7 +121,7 @@ function Home() {
             <FormControl
               sx={{
                 width: { xs: '70%', sm: '40%', md: '25%' },
-                bgcolor: '#ffffff',
+                bgcolor: theme.palette.mode === 'light' ? '#ffffff' : '#2A3742',
                 display: 'flex',
                 boxShadow: '0 0 5px 0 rgba(0,0,0,0.15)',
               }}

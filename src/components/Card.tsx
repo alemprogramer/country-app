@@ -2,25 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const Card = ({ country }: any) => {
+  const theme = useTheme();
   const Name = styled('h3')({
     fontWeight: 700,
-    color: '#090a0c',
+    color: theme.palette.mode === 'light' ?'#2A3742'  : '#ffffff',
     fontSize: '17px',
     lineHeight: 1,
     textTransform: 'capitalize',
   });
   const Data = styled('p')({
     fontWeight: 400,
-    color: '#090a0c',
+    color: theme.palette.mode === 'light' ?'#2A3742'  : '#ffffff',
     fontSize: '17px',
     lineHeight: 1,
     textTransform: 'capitalize',
   });
   const Title = styled('h5')({
     fontWeight: 500,
-    color: '#090a0c',
+    color: theme.palette.mode === 'light' ?'#2A3742'  : '#ffffff',
     fontSize: '18px',
     lineHeight: 1,
     textTransform: 'capitalize',
@@ -33,7 +35,7 @@ const Card = ({ country }: any) => {
           width: '100%',
           borderRadius: 2,
           flexDirection: 'column',
-          bgcolor: '#ffffff',
+          bgcolor: theme.palette.mode === 'light' ? '#ffffff' : '#2A3742',
           boxShadow: '0 0 10px 0 rgba(0,0,0,0.1)',
         }}
       >
