@@ -5,9 +5,11 @@ import WestIcon from '@mui/icons-material/West';
 import Header from '../components/Header';
 import styled from '@emotion/styled';
 import axios from 'axios';
+import { useTheme } from '@mui/material/styles';
 
 const Details = () => {
   let { countryName } = useParams();
+  const theme = useTheme();
   const [country, setCountry] = useState<any>('');
   const [currency, setCurrency] = useState<string>('');
   const [language, setLanguage] = useState<any>('');
@@ -80,7 +82,7 @@ const Details = () => {
                 justifyContent: 'start',
                 alignItems: 'center',
                 textTransform: 'capitalize',
-                color: '#131416',
+                color: theme.palette.mode === 'light' ? '#2A3742' : '#f1f1f1',
                 boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
                 padding: { md: '14px 40px' },
               }}
@@ -251,7 +253,7 @@ const Details = () => {
                           justifyContent: 'start',
                           alignItems: 'center',
                           textTransform: 'capitalize',
-                          color: '#131416',
+                          color: theme.palette.mode === 'light' ? '#2A3742' : '#f1f1f1',
                           boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
                           padding: '8px 30px',
                         }}

@@ -19,7 +19,7 @@ const Header = () => {
   });
   const Header = styled('header')({
     boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)',
-    backgroundColor: theme.palette.mode === 'light' ? '#ffffff' : '#000000',
+    backgroundColor: theme.palette.mode === 'light' ? '#ffffff' : '#2A3742',
   });
   return (
     <>
@@ -39,7 +39,7 @@ const Header = () => {
               justifyContent: 'start',
               alignItems: 'center',
               textTransform: 'capitalize',
-              color: theme.palette.mode === 'light' ? '#131416' : '#f1f1f1',
+              color: theme.palette.mode === 'light' ? '#2A3742' : '#f1f1f1',
             }}
             startIcon={<DarkModeOutlinedIcon />}
             onClick={() => colorMode.toggleColorMode()}
