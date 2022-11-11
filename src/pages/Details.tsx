@@ -173,7 +173,7 @@ const Details = () => {
                         width: '100%',
                       }}
                     >
-                      <Title>sub region : </Title>
+                      <Title>sub region:</Title>
                       <Info>{country?.subregion}</Info>
                     </Box>
                     <Box
